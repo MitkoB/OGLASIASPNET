@@ -17,10 +17,10 @@ namespace proekt_internetTeh.Models
         public virtual Category kategorija { get; set; }
         [Required]
         [Display(Name = "Дата на објавување")]
-        public DateTime pocetnaData { get; set; }
+        public Nullable<DateTime> pocetnaData { get; set; }
         [Required]
         [Display(Name = "Важи до")]
-        public DateTime krajnaData { get; set; }
+        public Nullable<DateTime> krajnaData { get; set; }
         [Required]
         [Display(Name = "Правно лице")]
 
@@ -43,10 +43,12 @@ namespace proekt_internetTeh.Models
         public string telBroj { get; set; }
         [Display(Name = "Фотографија")]
         public string slikaUrl { get; set; }
-        [Display(Name = "Опис на работата")]
+        [Display(Name = "Опис на оглас")]
 
         public string opis { get; set; }
         public virtual List<Rating> rejtinzi { get; set; }
+        [Display(Name = "Цена")]
+        public int cena { get; set; }
         public Oglas()
         {
             rejtinzi = new List<Rating>();
