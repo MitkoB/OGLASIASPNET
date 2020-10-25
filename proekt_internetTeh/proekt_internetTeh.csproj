@@ -176,7 +176,6 @@
     <Compile Include="Controllers\KomentarsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OglasController.cs" />
-    <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +211,10 @@
     <Compile Include="Migrations\202010251534123_cena.Designer.cs">
       <DependentUpon>202010251534123_cena.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010251619323_rating-izbrisan.cs" />
+    <Compile Include="Migrations\202010251619323_rating-izbrisan.Designer.cs">
+      <DependentUpon>202010251619323_rating-izbrisan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddToRoleModel.cs" />
@@ -224,7 +227,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Oglas.cs" />
     <Compile Include="Models\OglasToCategoryModel.cs" />
-    <Compile Include="Models\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -561,7 +563,6 @@
     <Content Include="Views\Komentars\Pregled.cshtml" />
     <Content Include="Views\Komentars\PartialKreiraj.cshtml" />
     <Content Include="Views\Oglas\NemaPristap.cshtml" />
-    <Content Include="Views\Ratings\Postavi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -601,6 +602,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010251534123_cena.resx">
       <DependentUpon>202010251534123_cena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010251619323_rating-izbrisan.resx">
+      <DependentUpon>202010251619323_rating-izbrisan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

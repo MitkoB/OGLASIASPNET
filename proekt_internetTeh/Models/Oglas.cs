@@ -46,12 +46,7 @@ namespace proekt_internetTeh.Models
         [Display(Name = "Опис на оглас")]
 
         public string opis { get; set; }
-        public virtual List<Rating> rejtinzi { get; set; }
-        [Display(Name = "Цена")]
         public int cena { get; set; }
-        public Oglas()
-        {
-            rejtinzi = new List<Rating>();
-        }
+      
     }
 }

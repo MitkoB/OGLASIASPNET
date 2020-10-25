@@ -29,7 +29,6 @@
             </th>
             <th></th>
             <th></th>
-            <th></th>
 
         </tr>
     </thead>
@@ -42,25 +41,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.zanimanje)
-                @{
-                    if (item.rejtinzi.Count() != 0)
-                    {
-                        <div>Просечен рејтинг:</div>
-                        int suma = 0;
-                        int brojac = 0;
-                        foreach (var rejt in item.rejtinzi)
-                        {
-                            suma += rejt.Rate;
-                            brojac += 1;
-                        }
-                        suma = suma / brojac;
-                        <span>@suma</span>
-                    }
-                    else
-                    {
-                        <div>Просечен рејтинг: 0</div>
-                    }
-                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.krajnaData)
@@ -93,12 +73,6 @@
                 @Html.ActionLink("Креирај коментар", "Kreiraj", "Komentars", new { id = item.Id }, null)
             }|
             @Html.ActionLink("Прочитај коментари", "Index", "Komentars", new { id = item.Id }, null) *@
-            </td>
-            <td>
-                @if (User.IsInRole("Administrator") || User.IsInRole("Editor") || User.IsInRole("User"))
-                {
-                    @Html.ActionLink("Оцени го огласот", "Postavi", "Ratings", new { id = item.Id }, null)
-                }
             </td>
         </tr>
         }

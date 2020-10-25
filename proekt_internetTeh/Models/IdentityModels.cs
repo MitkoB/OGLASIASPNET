@@ -35,6 +35,5 @@ namespace proekt_internetTeh.Models
         public System.Data.Entity.DbSet<proekt_internetTeh.Models.Favorite> Favorites { get; set; }
         public System.Data.Entity.DbSet<proekt_internetTeh.Models.Komentar> Komentars { get; set; }
 
-        public System.Data.Entity.DbSet<proekt_internetTeh.Models.Rating> Ratings { get; set; }
     }
 }
