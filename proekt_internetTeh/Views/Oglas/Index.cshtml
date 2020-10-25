@@ -1,0 +1,129 @@
+﻿@model IEnumerable<proekt_internetTeh.Models.Oglas>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Листа огласи</h2>
+
+<p>
+    @Html.ActionLink("Креирај свој оглас", "Create")
+</p>
+<table class="table" id="table1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.slikaUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.zanimanje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.krajnaData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pravnoLice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adresa)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <img src="@item.slikaUrl" style="max-width:200px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zanimanje)
+                @{
+                    if (item.rejtinzi.Count() != 0)
+                    {
+                        <div>Просечен рејтинг:</div>
+                        int suma = 0;
+                        int brojac = 0;
+                        foreach (var rejt in item.rejtinzi)
+                        {
+                            suma += rejt.Rate;
+                            brojac += 1;
+                        }
+                        suma = suma / brojac;
+                        <span>@suma</span>
+                    }
+                    else
+                    {
+                        <div>Просечен рејтинг: 0</div>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.krajnaData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pravnoLice)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.adresa)
+            </td>
+            <td>
+                @if (Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("Додади во омилени", "AddToFavorite", "Account", new { id = item.Id }, null)
+                }
+            </td>
+            <td>
+                @if (User.Identity.Name.Equals(item.email))
+                {
+                    @Html.ActionLink("Измени", "Edit", new { id = item.Id })
+                }|
+                @Html.ActionLink("Прочитај повеќе", "Details", new { id = item.Id })|
+                @if (User.Identity.Name == item.email)
+                {
+                    <button data-id="@item.Id" class="btn btn-link js-delete">Избриши</button>
+                }
+                @* @if (Request.IsAuthenticated)
+            {
+                @Html.ActionLink("Креирај коментар", "Kreiraj", "Komentars", new { id = item.Id }, null)
+            }|
+            @Html.ActionLink("Прочитај коментари", "Index", "Komentars", new { id = item.Id }, null) *@
+            </td>
+            <td>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Editor") || User.IsInRole("User"))
+                {
+                    @Html.ActionLink("Оцени го огласот", "Postavi", "Ratings", new { id = item.Id }, null)
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        //$(document).on("ready", function () {
+        var table = $("#table1").DataTable();
+        $("#table1 .js-delete").click( function() {
+            var kopce = $(this);
+            bootbox.confirm("Дали сте сигурни дека сакате да го избрешете огласот?",
+                function (result) {
+                    if (result) {
+                        $.ajax({
+                            method: "GET",
+                            url: "/Oglas/Delete/" + kopce.attr("data-id"),
+                            success: function () {
+                                table.row(kopce.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+        });
+    
+    </script>
+}

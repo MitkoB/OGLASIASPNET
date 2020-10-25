@@ -1,0 +1,18 @@
+﻿@model proekt_internetTeh.Models.Komentar
+
+@{
+    ViewBag.Title = "PartialKreiraj";
+}
+<h2>Ваш коментар</h2>
+@using (Html.BeginForm("PartialKreiraj", "Komentars"))
+{
+
+<div class="form-group">
+    @Html.DisplayFor(m => m.Email)
+    @Html.TextBoxFor(m => m.komentar, new { @class = "form-control" })
+    <button type="submit" class="btn btn-primary">Постави</button>
+</div>
+    @Html.HiddenFor(m => m.Email)
+    @Html.HiddenFor(m => m.oglasID)
+
+}

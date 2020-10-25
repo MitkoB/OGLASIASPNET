@@ -1,0 +1,85 @@
+﻿@model proekt_internetTeh.Models.Favorite
+
+@{
+    ViewBag.Title = "ViewFavorite";
+}
+
+<h2>Почитуван @Model.Email ова се вашите омилени огласи</h2>
+
+<br />
+<br />
+
+<table class="table" id="table3">
+    <thead>
+        <tr>
+            <th>
+                Фотографија
+            </th>
+            <th>
+                Наслов
+            </th>
+            <th>
+                Крајна дата
+            </th>
+            <th>
+                Правно лице
+            </th>
+            <th>
+                Адреса
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OmileniOglasi)
+        {
+            <tr>
+                <td>
+                    <img src="@item.slikaUrl" style="max-width:200px" />
+                </td>
+                <td>
+                    @Html.ActionLink(item.zanimanje, "Details", "Oglas", new { id = item.Id }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.krajnaData)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pravnoLice)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.adresa)
+                </td>
+                <td>
+                    <button data-id="@item.Id" class="btn btn-link js-delete">Отстрани од омилени</button>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        //$(document).on("ready", function () {
+        var table = $("#table3").DataTable();
+        $("#table3 .js-delete").click( function() {
+            var kopce = $(this);
+            bootbox.confirm("Дали сте сигурни дека сакате да го отстраните од омилени огласот?",
+                function (result) {
+                    if (result) {
+                        $.ajax({
+                            method: "GET",
+                            url: "/Account/DeleteFavOglas/" + kopce.attr("data-id"),
+                            success: function () {
+                                table.row(kopce.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+        });
+      //  });
+    </script>
+}

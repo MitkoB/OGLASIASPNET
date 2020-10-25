@@ -1,0 +1,27 @@
+﻿@model proekt_internetTeh.Models.OglasToCategoryModel
+
+@{
+    ViewBag.Title = "OglasToKategorija";
+}
+
+<h2>Додади го огласот @ViewBag.imeOglas во некоја од категориите</h2>
+<br />
+<br />
+
+<p>Доколку посакуваната категорија ја нема, можете истата да ја креирате овде</p>
+
+@Html.ActionLink("Креирај категорија", "Create", "Categories", new { id = Model.selectedOglas }, null)
+<br />
+<br />
+<br />
+
+@using (Html.BeginForm("OglasToKategorija", "Oglas"))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.selectedCategory, new SelectList(Model.categories, "Id", "ime"))
+    </div>
+    <button type="submit" class="btn btn-danger">Додади</button>
+
+    @Html.HiddenFor(m => m.selectedOglas)
+}
+

@@ -1,0 +1,18 @@
+﻿@model proekt_internetTeh.Models.Rating
+
+@{
+    Layout = null;
+}
+<h2>Почитуван @Model.email, постави рејтинг на @ViewBag.ime</h2>
+
+@using (Html.BeginForm("Postavi", "Ratings"))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m => m.Rate, new SelectList(Model.ratings), new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-danger">Add</button>
+    @Html.HiddenFor(m => m.oglas)
+    <i class="icon-star-empty"></i>
+    <i class="icon-star-empty"></i> 
+    <i class="icon-star-empty"></i> 
+}

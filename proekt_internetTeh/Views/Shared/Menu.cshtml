@@ -1,0 +1,12 @@
+﻿@model List<proekt_internetTeh.Models.Category>
+<li class="dropdown">
+    <a class=" dropdown-toggle"style="color:royalblue" data-toggle="dropdown" role="button" aria-expanded="false">ОГЛАСИ<span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li class="dropdown-header"><a href="@Url.Action("Index","Oglas",null)">СИТЕ ОГЛАСИ</a></li>
+        <li class="dropdown-divider"></li>
+        @foreach (var item in Model)
+        {
+            <li class="dropdown-item"><a href="@Url.Action("PoKategorija","Categories",new {id=item.Id })">@item.ime</a></li>
+        }
+    </ul>
+</li>

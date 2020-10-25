@@ -1,0 +1,65 @@
+﻿@model IEnumerable<proekt_internetTeh.Models.Komentar>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Коментари за огласот @ViewBag.KomentarOglas</h2>
+
+
+<table class="table" id="table5">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.komentar)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.komentar)
+                </td>
+                <td>
+                    @if (User.Identity.Name == item.Email)
+                    {
+                       @Html.ActionLink("Измени", "Edit", new { id = item.Id }) 
+                    <button data-id = "@item.Id" class="btn btn-link js-delete">Избриши</button> 
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        //$(document).on("ready", function () {
+        var table = $("#table5").DataTable();
+        $("#table5 .js-delete").click(function () {
+            var kopce = $(this);
+            bootbox.confirm("Дали сте сигурни дека сакате да го избрешете коментарот за огласот?",
+                function (result) {
+                    if (result) {
+                        $.ajax({
+                            method: "GET",
+                            url: "/Komentars/Delete/" + kopce.attr("data-id"),
+                            success: function () {
+                                table.row(kopce.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+        });
+          //  });
+    </script>
+}

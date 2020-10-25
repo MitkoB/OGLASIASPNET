@@ -1,0 +1,108 @@
+﻿@model proekt_internetTeh.Models.Oglas
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детали за огласот</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <img src="@Model.slikaUrl" style="max-width:200px" />
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.zanimanje)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.zanimanje)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.kategorija)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kategorija.ime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.pocetnaData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pocetnaData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.krajnaData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.krajnaData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pravnoLice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pravnoLice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.opstina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.opstina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adresa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adresa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telBroj)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telBroj)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.opis)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Назад кон листата на огласи", "Index")
+</p>
+<br/>
+<br/>
+<div>
+    @{
+        Html.RenderAction("Pregled", "Komentars", new { id = Model.Id });
+        if (Request.IsAuthenticated)
+        {
+            Html.RenderAction("PartialKreiraj", "Komentars", new { id = Model.Id });
+        }
+    }
+</div>

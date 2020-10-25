@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - oglasiMK</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/style1.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/flip_card_css.css")" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-fixed-top navbar-expand navbar-dark pt-0 pb-0 pl-5" style="background-color:#00264d;">
+
+        <a href="#" class="ml-3"><img src="@Url.Content("~/Content/images/logo.png")" style="height: 70px; width: 180px;"></a>
+        <ul class="navbar-nav ml-auto mr-3  font-weight-bold">
+            <li class="nav-item">
+                @Html.ActionLink("ДОМА", "Index", "Home", new { @class = "nav-link active ovde" }, null)
+            </li>
+            <li class="nav-item" style="margin-left:15px">
+                @{Html.RenderAction("Menu", "Categories");}
+            </li>
+            <li class="nav-item" style="margin-left:15px">
+                @Html.ActionLink("КРЕИРАЈ ОГЛАС", "Create", "Oglas", new { @class = "nav-link" }, null)
+            </li>
+            <li class="nav-item" style="margin-left:15px">
+                @Html.ActionLink("ЗА НАС", "About", "Home", new { @class = "nav-link" }, null)
+            </li>
+            <li class="nav-item" style="margin-left:15px">
+                @Html.ActionLink("КОНТАКТ", "Contact", "Home", new { @class = "nav-link" }, null)
+            </li>
+            <li class="nav-item" style="margin-left:15px">
+                @Html.ActionLink("ОМИЛЕНИ ОГЛАСИ", "ViewFavorite", "Account", new { @class = "nav-link" }, null)
+            </li>
+            <li class="nav-item" style="margin-left:35px">
+                @Html.Partial("_LoginPartial")
+            </li>
+        </ul>
+        
+    </nav>
+
+
+    <div class="" style="min-height:100%">
+        @RenderBody()
+    </div>
+
+
+
+    <footer class=" mb-0 text-white pt-0 pb-0" style="background-color:#00264d; bottom: 0;">
+        <div class="row no-gutters pb-2 justify-content-between d-flex">
+            <div class="col-4 pl-3">
+                <img src="@Url.Content("~/Content/images/logo.png")" style="height: 70px; width: 180px; border-bottom: 1px solid orangered"><br>
+                <i class="fab fa-facebook-f fa-2x pr-2"></i>
+                <i class="fab fa-twitter fa-2x pr-2"></i>
+                <i class="fab fa-google fa-2x"></i>
+            </div>
+            <div class="col-3 text-center">
+                <div class="mt-5 text-center">
+                    <small class="pt-5">Copyright &copy; OglasiMK</small>
+                </div>
+            </div>
+
+            <div class="col-4 text-right pr-3">
+                <h4 class="text-white font-weight-light pt-3 pb-2">
+                    @Html.ActionLink("ОГЛАСИ", "Index", "Oglas", new { @class = "text-white" }, null) |
+                    @Html.ActionLink("ЗА НАС", "About", "Home", new { @class = "text-white" }, null) |
+                    @Html.ActionLink("КОНТАКТ", "Contact", "Home", new { @class = "text-white" }, null) |
+                </h4>
+            </div>
+
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

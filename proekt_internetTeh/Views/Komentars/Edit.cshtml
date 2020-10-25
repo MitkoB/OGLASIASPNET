@@ -1,0 +1,27 @@
+﻿@model proekt_internetTeh.Models.Komentar
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Промени го коментарот за огласот @ViewBag.OglasKomentar</h2>
+@using (Html.BeginForm("Edit", "Komentars"))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.DisplayFor(m => m.Email)
+    </div>
+    @Html.HiddenFor(m => m.Email)
+    @Html.HiddenFor(m => m.oglasID)
+    <div class="form-group">
+        @Html.LabelFor(m => m.komentar)
+        @Html.TextBoxFor(m => m.komentar, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Постави</button>
+}
+
+<div>
+    @Html.ActionLink("Погледни ја листата коментари за огласот", "Index",new { Id=Model.oglasID})
+</div>
