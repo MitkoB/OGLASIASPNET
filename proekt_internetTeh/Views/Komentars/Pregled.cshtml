@@ -11,17 +11,14 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script> 
 </head>
 <body>
-    <h2>Коментари</h2>
+    <h2 style="color:#e86f00" >Коментари</h2>
+    <hr style="background: linear-gradient(.25turn,#01255c, white, #01255c);border:0; height:3px;" />
 
-    <table class="table" id="table6">
+    <table class="table text-white table-borderless border-0" id="table6">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.komentar)
-                </th>
+                <th></th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -29,22 +26,22 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td><img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png" style="width: 70px; height: 70px;" class="rounded-circle float-right"></td>
+                    <td style="width:600px;">
+                        <h5 class="font-weight-bold" style="color:#e86f00">@item.Email</h5>
+                        <p class="font-weight-light">@item.komentar</p>
+                    </td>                    
                     <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.komentar)
-                    </td>
-                    <td>
-                        @if (User.Identity.Name.Equals(item.Email))
-                        {@Html.ActionLink("Измени", "Edit", "Komentars", new { id = item.Id }, null)}|
+                        
                         @if (User.Identity.Name.Equals(item.Email))
                         {
-                        @Ajax.ActionLink("Brisi", "Delete", "Komentars", new { id = item.Id },new AjaxOptions{
-                       HttpMethod = "Get",
-                       Confirm = "Дали сте сигурни дека сакате да го избришете вашиот коментар?",
-                       OnSuccess="RemoveRow"},
-                        new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                            @Ajax.ActionLink(" Избриши коментар ", "Delete", "Komentars", new { id = item.Id }, new AjaxOptions
+                            {
+                             HttpMethod = "Get",
+                             Confirm = "Дали сте сигурни дека сакате да го избришете вашиот коментар?",
+                             OnSuccess = "RemoveRow"
+                            },
+                             new { @class = "btn btn-danger fa fa-trash float-right " })
                         }
                     </td>
                 </tr>

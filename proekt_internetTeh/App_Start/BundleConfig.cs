@@ -28,10 +28,10 @@ namespace proekt_internetTeh
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
+                      "~/Content/Site.css",
+                      "~/Content/flip_card_css.css",
                       "~/Content/DataTables/css/dataTables.bootstrap.css",
-                      "~/Content/all.min.css",
-                      "~/Content/style1.css"));
+                      "~/Content/all.min.css"));
         }
     }
 }

@@ -1,103 +1,92 @@
 ﻿@model IEnumerable<proekt_internetTeh.Models.Oglas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Сите огласи";
 }
 
-<h2>Листа огласи</h2>
 
-<p>
-    @Html.ActionLink("Креирај свој оглас", "Create")
-</p>
-<table class="table" id="table1">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.slikaUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.zanimanje)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.krajnaData)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.pravnoLice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.adresa)
-            </th>
-            <th></th>
-            <th></th>
+<div class="container pt-4 pb-5">
+    <div class="row ">
+        <div class="col-7 pl-5">
+            <h1 class="text-left display-4" style="color:#e86f00">Огласи</h1>
+        </div>
+        <div class="col-5 my-auto">
+            <a href="/Oglas/Create" class="btn btn-link text-white btn-lg float-right" style="background-color:#e86f00"><i class="fa fa-plus-circle"> Додади оглас</i></a>
+        </div>
+    </div>
+    
+    <hr style="background: linear-gradient(.25turn,white, #e86f00, white);border:0; height:3px;" class="pt-0 mt-0" />
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                <img src="@item.slikaUrl" style="max-width:200px" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.zanimanje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.krajnaData)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pravnoLice)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.adresa)
-            </td>
-            <td>
-                @if (Request.IsAuthenticated)
-                {
-                    @Html.ActionLink("Додади во омилени", "AddToFavorite", "Account", new { id = item.Id }, null)
-                }
-            </td>
-            <td>
-                @if (User.Identity.Name.Equals(item.email))
-                {
-                    @Html.ActionLink("Измени", "Edit", new { id = item.Id })
-                }|
-                @Html.ActionLink("Прочитај повеќе", "Details", new { id = item.Id })|
-                @if (User.Identity.Name == item.email)
-                {
-                    <button data-id="@item.Id" class="btn btn-link js-delete">Избриши</button>
-                }
-                @* @if (Request.IsAuthenticated)
+    <div class="w3-container w3-animate-left">
+        <div class="row">
+            @foreach (var item in Model)
             {
-                @Html.ActionLink("Креирај коментар", "Kreiraj", "Komentars", new { id = item.Id }, null)
-            }|
-            @Html.ActionLink("Прочитај коментари", "Index", "Komentars", new { id = item.Id }, null) *@
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                <div class="col-xs-12 col-md-4 mt-3">
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <img src="@item.slikaUrl" class="card-img-top" style="height:200px;" />
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <img src="@item.slikaUrl" class="card-img-top" style="height:200px;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="height: 150px; overflow:hidden;">
+                            <h4>@Html.DisplayFor(modelItem => item.zanimanje)</h4>
+                            <p class="small"> @Html.DisplayFor(modelItem => item.opis)</p>
+                            
+                        </div>
+                        <div class="card-footer text-muted font-weight-light">
+                            <div class="row">
+                                <div class="col-12">
+                                    <i class="fa fa-user small text-muted"> @item.pravnoLice</i>
+                                    <i class="fa fa-calendar small"> @item.krajnaData</i>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-12">
+                                    <a class="btn btn-link text-white float-left" href="/Oglas/Details/@item.Id" style="background-color:#e86f00">Детали</a>
 
-@section scripts{
-    <script>
-        //$(document).on("ready", function () {
-        var table = $("#table1").DataTable();
-        $("#table1 .js-delete").click( function() {
-            var kopce = $(this);
-            bootbox.confirm("Дали сте сигурни дека сакате да го избрешете огласот?",
-                function (result) {
-                    if (result) {
-                        $.ajax({
-                            method: "GET",
-                            url: "/Oglas/Delete/" + kopce.attr("data-id"),
-                            success: function () {
-                                table.row(kopce.parents("tr")).remove().draw();
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        <!---TUKA TREBA DA SE PROVERE DALI NA TAJ KORISNIK TAJ TUKA OGLAS MU E U FAVORITES, AKO MU E SRCETO DA E POLNO, AKO NE, SRCETO PRAZNO-->
+                                        <a href="/Account/AddToFavorite/@item.Id" class="btn btn-link text-danger btn-light"><i class="fa fa-heart"></i></a>
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+    @section scripts{
+        <script>
+            //$(document).on("ready", function () {      
+                var table = $("#table1").DataTable();
+                $("#table1 .js-delete").click(function () {
+                    var kopce = $(this);
+                    bootbox.confirm("Дали сте сигурни дека сакате да го избрешете огласот?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    method: "GET",
+                                    url: "/Oglas/Delete/" + kopce.attr("data-id"),
+                                    success: function () {
+                                        table.row(kopce.parents("tr")).remove().draw();
+                                    }
+                                });
                             }
                         });
-                    }
                 });
-        });
-    
-    </script>
-}
+            
+        </script>
+    }

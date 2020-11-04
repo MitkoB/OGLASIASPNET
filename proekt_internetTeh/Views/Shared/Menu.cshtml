@@ -1,8 +1,8 @@
 ﻿@model List<proekt_internetTeh.Models.Category>
 <li class="dropdown">
-    <a class=" dropdown-toggle"style="color:royalblue" data-toggle="dropdown" role="button" aria-expanded="false">ОГЛАСИ<span class="caret"></span></a>
+    <a class=" dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-expanded="false">Огласи<span class="caret"></span></a>
     <ul class="dropdown-menu" role="menu">
-        <li class="dropdown-header"><a href="@Url.Action("Index","Oglas",null)">СИТЕ ОГЛАСИ</a></li>
+        <li class="dropdown-header"><a href="@Url.Action("Index","Oglas",null)">Сите огласи</a></li>
         <li class="dropdown-divider"></li>
         @foreach (var item in Model)
         {

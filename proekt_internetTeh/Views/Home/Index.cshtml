@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<proekt_internetTeh.Models.Oglas>
+@{
     ViewBag.Title = "Home Page";
 }
 <!----------------  CAROUSEL --------------------->
@@ -25,173 +26,58 @@
 <!-------------------- MAIN CONTAINER ------------------------->
 <div class="container mt-5 pl-5 pr-5 mb-5">
     <div>
-        <h3 class="pb-2" style="border-bottom: 2px solid orange; ">Најпопуларни огласи</h3>
+        <h1 class="text-left display-4" style="color:#e86f00">Најпопуларни огласи</h1>
+        <hr style="background: linear-gradient(.25turn,#01255c, #e86f00, white); height:3px;" />
     </div>
     <!--------------------- CARD ITEMS ------------------------------>
     <div class="row mt-4">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-img">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="@Url.Content("~/Content/images/car1.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <img src="@Url.Content("~/Content/images/car1-interior.jpg")" class="card-img-top" style="height:200px;">
+        @foreach (var item in Model)
+        {
+            if (item.Id % 2 == 0) { 
+                <div class="col-xs-12 col-md-4 mt-3">
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <img src="@item.slikaUrl" class="card-img-top" style="height:200px;" />
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <img src="@item.slikaUrl" class="card-img-top" style="height:200px;" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4>Mercedes Benz C450</h4>
-                    <p> Се продава Mercedes Benz C450. Моделот е 2018 година. Одлично зачуван со високо ниво на опрема.</p>
-                    <i class="far fa-user"></i> Марко Маркоски
-                </div>
-                <div class="card-footer text-muted font-weight-light">
-                    <i class="fa fa-eye pr-2 pt-2"> 3492</i>
-                    <i class="fas fa-calendar-alt"> 23.09.2019</i>
-                    <a class="btn btn-link text-white float-right" href="#" style="background-color: orangered;">Детали</a>
-                </div>
-            </div>
-        </div>
+                        <div class="card-body" style="height: 150px; overflow:hidden;">
+                            <h4>@Html.DisplayFor(modelItem => item.zanimanje)</h4>
+                            <p class="small"> @Html.DisplayFor(modelItem => item.opis)</p>
 
-        <div class="col-4">
-            <div class="card">
-                <div class="card-img">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="@Url.Content("~/Content/images/apartment1-1.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <img src="@Url.Content("~/Content/images/apartment1-2.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4>Стан во Скопје</h4>
-                    <p>Се издава стан во Автокоманда. Трособен и комплетно наместен со нов луксузен мебел.</p>
-                    <i class="far fa-user"></i> Петар Петровски
-                </div>
-                <div class="card-footer text-muted font-weight-light">
-                    <i class="fa fa-eye pr-2 pt-2"> 3120</i>
-                    <i class="fas fa-calendar-alt"> 19.06.2020</i>
-                    <a class="btn btn-link text-white float-right" href="#" style="background-color: orangered;">Детали</a>
-                </div>
-            </div>
-        </div>
+                        <div class="card-footer text-muted font-weight-light">
+                            <div class="row">
+                                <div class="col-12">
+                                    <i class="fa fa-user small text-muted"> @item.pravnoLice</i>
+                                    <i class="fa fa-calendar small"> @item.krajnaData</i>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-12">
+                                    <a class="btn btn-link text-white float-left" href="/Oglas/Details/@item.Id" style="background-color:#e86f00">Детали</a>
 
-        <div class="col-4">
-            <div class="card">
-                <div class="card-img">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="@Url.Content("~/Content/images/car2.jpg")" class="card-img-top" style="height:200px;">
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        <!---TUKA TREBA DA SE PROVERE DALI NA TAJ KORISNIK TAJ TUKA OGLAS MU E U FAVORITES, AKO MU E SRCETO DA E POLNO, AKO NE, SRCETO PRAZNO-->
+                                        <a href="/Account/AddToFavorite/@item.Id" class="btn btn-link text-danger btn-light"><i class="fa fa-heart"></i></a>
+                                    }
+                                </div>
                             </div>
-                            <div class="flip-card-back">
-                                <img src="@Url.Content("~/Content/images/car2-interior.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4>Opel Astra GTC</h4>
-                    <p>Се продава Opel Astra GTC 2010 година. Во одлична состојба, економичен и штедлив автомобил.</p>
-                    <i class="far fa-user"></i> Саше Ѓоргиевски
-                </div>
-                <div class="card-footer text-muted font-weight-light">
-                    <i class="fa fa-eye pr-2 pt-2"> 2720</i>
-                    <i class="fas fa-calendar-alt"> 30.07.2020</i>
-                    <a class="btn btn-link text-white float-right" href="#" style="background-color: orangered;">Детали</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="row mt-4">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-img">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="@Url.Content("~/Content/images/car1.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <img src="@Url.Content("~/Content/images/car1-interior.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h4>Mercedes Benz C450</h4>
-                    <p> Се продава Mercedes Benz C450. Моделот е 2018 година. Одлично зачуван со високо ниво на опрема.</p>
-                    <i class="far fa-user"></i> Марко Маркоски
-                </div>
-                <div class="card-footer text-muted font-weight-light">
-                    <i class="fa fa-eye pr-2 pt-2"> 3492</i>
-                    <i class="fas fa-calendar-alt"> 23.09.2019</i>
-                    <a class="btn btn-link text-white float-right" href="#" style="background-color: orangered;">Детали</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-4">
-            <div class="card">
-                <div class="card-img">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="@Url.Content("~/Content/images/apartment1-1.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <img src="@Url.Content("~/Content/images/apartment1-2.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class="card-body">
-                    <h4>Стан во Скопје</h4>
-                    <p>Се издава стан во Автокоманда. Трособен и комплетно наместен со нов луксузен мебел.</p>
-                    <i class="far fa-user"></i> Петар Петровски
-                </div>
-                <div class="card-footer text-muted font-weight-light">
-                    <i class="fa fa-eye pr-2 pt-2"> 3120</i>
-                    <i class="fas fa-calendar-alt"> 19.06.2020</i>
-                    <a class="btn btn-link text-white float-right" href="#" style="background-color: orangered;">Детали</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card">
-                <div class="card-img">
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">
-                                <img src="@Url.Content("~/Content/images/car2.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
-                            <div class="flip-card-back">
-                                <img src="@Url.Content("~/Content/images/car2-interior.jpg")" class="card-img-top" style="height:200px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4>Opel Astra GTC</h4>
-                    <p>Се продава Opel Astra GTC 2010 година. Во одлична состојба, економичен и штедлив автомобил.</p>
-                    <i class="far fa-user"></i> Саше Ѓоргиевски
-                </div>
-                <div class="card-footer text-muted font-weight-light">
-                    <i class="fa fa-eye pr-2 pt-2"> 2720</i>
-                    <i class="fas fa-calendar-alt"> 30.07.2020</i>
-                    <a class="btn btn-link text-white float-right" href="#" style="background-color: orangered;">Детали</a>
-                </div>
-            </div>
-        </div>
+            }
+        }
     </div>
 
 </div>

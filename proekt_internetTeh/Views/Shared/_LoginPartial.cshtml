@@ -3,20 +3,29 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Здраво " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li  style="margin-left:10px"><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class=" dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> @User.Identity.GetUserName()<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="dropdown-header">
+                        <a href="javascript:document.getElementById('logoutForm').submit()" style="color:orangered" class="font-weight-bold pt-2 text-center">Одјави се</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Регистрирај се", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li style="margin-left:10px">@Html.ActionLink("Најави се", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>
+            <a href="/Account/Register" class="font-weight-bold small pt-1" id="registerLink" style="color:white">Регистрирај се</a>
+        </li>
+        <li style="margin-left:10px">
+            <span style="color:orangered">| &nbsp;</span>
+            <a href="/Account/Login" class="small font-weight-bold pt-1" id="loginLink" style="color:white">Најави се</a>
+        </li>
     </ul>
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using proekt_internetTeh.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,10 @@ namespace proekt_internetTeh.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View();
+            return View(db.Oglas.ToList());
         }
 
         public ActionResult About()

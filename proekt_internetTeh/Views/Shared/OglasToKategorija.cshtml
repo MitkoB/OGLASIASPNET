@@ -1,27 +1,58 @@
 ﻿@model proekt_internetTeh.Models.OglasToCategoryModel
 
 @{
-    ViewBag.Title = "OglasToKategorija";
+    ViewBag.Title = "Додели категорија";
 }
 
-<h2>Додади го огласот @ViewBag.imeOglas во некоја од категориите</h2>
-<br />
-<br />
+<div class="container mt-5 mb-5 ">
+    <div class="bgContainer text-white mr-5 ml-5 pt-3 pb-5 pr-5 pl-5" style="background: rgba(0,38,77,1); box-shadow: 10px 10px 30px grey">
+        <h4 class="text-center display-4" style="color:#e86f00">Додели категорија на огласот</h4>
+        <hr style="background: linear-gradient(.25turn,#01255c, #e86f00, #01255c);border:0; height:3px;" />
+        <div class="w3-container w3-animate-zoom">
 
-<p>Доколку посакуваната категорија ја нема, можете истата да ја креирате овде</p>
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <label class="font-weight-bold">Име на оглас</label>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-1">
+                <div class="col-4">
+                    <p class="font-weight-light">@ViewBag.imeOglas</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <p class="font-weight-bold">Избери категорија</p>
+                </div>
+            </div>
 
-@Html.ActionLink("Креирај категорија", "Create", "Categories", new { id = Model.selectedOglas }, null)
-<br />
-<br />
-<br />
+            @using (Html.BeginForm("OglasToKategorija", "Oglas"))
+            {
+                <div class="row justify-content-center mt-1">
+                    <div class="col-4">
+                        @Html.DropDownListFor(m => m.selectedCategory, new SelectList(Model.categories, "Id", "ime"), new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-2">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-lg text-white" style="background-color:#e86f00">Додади</button>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.selectedOglas)
+            }
 
-@using (Html.BeginForm("OglasToKategorija", "Oglas"))
-{
-    <div class="form-group">
-        @Html.DropDownListFor(m => m.selectedCategory, new SelectList(Model.categories, "Id", "ime"))
-    </div>
-    <button type="submit" class="btn btn-danger">Додади</button>
+            <div class="row justify-content-center mt-2">
+                <div class="col-4">
+                    <p class="font-weight-light">
+                        Доколку ја немаме соодветната категорија,
+                        истата можете да ја креирате <a href="/Categories/Create/@Model.selectedOglas" class="font-weight-bold">ТУКА</a>
+                    </p>
+                </div>
+            </div>
 
-    @Html.HiddenFor(m => m.selectedOglas)
-}
+        </div>
+</div>
+</div>
+
+            
 

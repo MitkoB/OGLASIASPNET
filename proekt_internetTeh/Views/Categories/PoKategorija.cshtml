@@ -4,98 +4,78 @@
     ViewBag.Title = "PoKategorija";
 }
 
-<h2>Огласи во рамки на категоријата @ViewBag.imeKat</h2>
+<div class="container pt-4 pb-5">
+    <h1 class="text-left display-4" style="color:#e86f00">Огласи од категорија @ViewBag.imeKat</h1>
+    <hr style="background: linear-gradient(.25turn,white, #e86f00, white);border:0; height:3px;" class="pt-0 mt-0" />
 
-<table class="table" id="table2">
-    <thead>
-        <tr>
-            <th>
-                Фотографија
-            </th>
-            <th>
-                Наслов
-            </th>
-            <th>
-                Крајна дата
-            </th>
-            <th>
-                Правно лице
-            </th>
-            <th>
-                Адреса
-            </th>
-            <th>
+    <div class="w3-container w3-animate-left">
+        <div class="row">
+            @foreach (var item in Model.Oglasi)
+            {
+                <div class="col-xs-12 col-md-4 mt-3">
+                    <div class="card">
+                        <div class="card-img">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <img src="@item.slikaUrl" class="card-img-top" style="height:200px;" />
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <img src="@item.slikaUrl" class="card-img-top" style="height:200px;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="height: 150px; overflow:hidden;">
+                            <h4>@Html.DisplayFor(modelItem => item.zanimanje)</h4>
+                            <p class="small"> @Html.DisplayFor(modelItem => item.opis)</p>
+                        
+                        </div>
+                        <div class="card-footer text-muted font-weight-light">
+                            <div class="row">
+                                <div class="col-12">
+                                    <i class="fa fa-user small text-muted">@item.pravnoLice</i>
+                                    <i class="fa fa-calendar small"> @item.krajnaData</i>
+                                </div>
+                            </div>
+                            <div class="row pt-2">
+                                <div class="col-12">
+                                    <a class="btn btn-link text-white float-left" href="/Oglas/Details/@item.Id" style="background-color:#e86f00">Детали</a>                                 
 
-            </th>
-            <th>
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        <!---TUKA TREBA DA SE PROVERE DALI NA TAJ KORISNIK TAJ TUKA OGLAS MU E U FAVORITES, AKO MU E SRCETO DA E POLNO, AKO NE, SRCETO PRAZNO-->
+                                        <a href="/Account/AddToFavorite/@item.Id" class="btn btn-link text-danger btn-light"><i class="fa fa-heart"></i></a>
+                                    }
+                                </div>
+                            </div>
+                     </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Oglasi)
-        {
-            <tr>
-                <td>
-                    <img src="@item.slikaUrl" style="max-width:200px; max-height:200px" />
-                </td>
-                <td>
-                    @Html.ActionLink(item.zanimanje, "Details", "Oglas", new { id = item.Id }, null)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.krajnaData)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.pravnoLice)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.adresa)
-                </td>
-                <td>
-                    @if (Request.IsAuthenticated)
-                    {
-                        @Html.ActionLink("Додади во омилени", "AddToFavorite", "Account", new { id = item.Id }, null)
-                    }
-                </td>
-                <td>
-                    @if (User.Identity.Name == item.email)
-                    {
-                        @Html.ActionLink("Измени", "Edit", "Oglas", new { id = item.Id }, null)
-                    }|
-                    @if (User.Identity.Name == item.email)
-                    {<button data-id="@item.Id" class="btn btn-link js-delete">Избриши</button>}
-                    @* @if (Request.IsAuthenticated)
-        {
-            @Html.ActionLink("Креирај коментар", "Kreiraj", "Komentars", new { id = item.Id }, null)
-        }|
-        @Html.ActionLink("Прочитај коментари", "Index", "Komentars", new { id = item.Id }, null) *@
-                </td>
-
-            </tr>
-        }
-    </tbody>
-</table>
-
-@section scripts{
-    <script>
-        //$(document).on("ready", function () {
-        var table = $("#table2").DataTable();
-        $("#table2 .js-delete").click( function() {
-            var kopce = $(this);
-            bootbox.confirm("Дали сте сигурни дека сакате да го избрешете огласот?",
-                function (result) {
-                    if (result) {
-                        $.ajax({
-                            method: "GET",
-                            url: "/Oglas/Delete/" + kopce.attr("data-id"),
-                            success: function () {
-                                table.row(kopce.parents("tr")).remove().draw();
-                            }
-                        });
-                    }
-                });
-        });
-      //  });
-    </script>
-}
+    @section scripts{
+        <script>
+            //$(document).on("ready", function () {
+            var table = $("#table2").DataTable();
+            $("#table2 .js-delete").click(function () {
+                var kopce = $(this);
+                bootbox.confirm("Дали сте сигурни дека сакате да го избрешете огласот?",
+                    function (result) {
+                        if (result) {
+                            $.ajax({
+                                method: "GET",
+                                url: "/Oglas/Delete/" + kopce.attr("data-id"),
+                                success: function () {
+                                    table.row(kopce.parents("tr")).remove().draw();
+                                }
+                            });
+                        }
+                    });
+            });
+              //  });
+        </script>
+    }
