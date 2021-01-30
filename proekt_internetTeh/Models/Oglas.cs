@@ -41,12 +41,15 @@ namespace proekt_internetTeh.Models
         [Display(Name = "Телефонски број")]
 
         public string telBroj { get; set; }
-        [Display(Name = "Фотографија")]
+        [Display(Name = "Фотографија 1")]
         public string slikaUrl { get; set; }
         [Display(Name = "Опис на оглас")]
-
+       
         public string opis { get; set; }
+        [Display(Name = "Цена")]
         public int cena { get; set; }
+        [Display(Name = "Фотографија 2")]
+        public string urlSlika2 { get; set; }
       
     }
 }

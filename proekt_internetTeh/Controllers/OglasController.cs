@@ -49,7 +49,7 @@ namespace proekt_internetTeh.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,zanimanje,kategorija,pocetnaData,krajnaData,pravnoLice,opstina,adresa,email,telBroj,slikaUrl,opis")] Oglas oglas)
+        public ActionResult Create([Bind(Include = "Id,zanimanje,kategorija,pocetnaData,krajnaData,pravnoLice,opstina,adresa,email,telBroj,slikaUrl,opis, cena, urlSlika2")] Oglas oglas)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace proekt_internetTeh.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,zanimanje,kategorija,pocetnaData,krajnaData,pravnoLice,opstina,adresa,email,telBroj,slikaUrl,opis")] Oglas oglas)
+        public ActionResult Edit([Bind(Include = "Id,zanimanje,kategorija,pocetnaData,krajnaData,pravnoLice,opstina,adresa,email,telBroj,slikaUrl,opis, cena, urlSlika2")] Oglas oglas)
         {
             if (User.Identity.Name == oglas.email)
             {

@@ -28,7 +28,47 @@
                 <tr>
                     <td><img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png" style="width: 70px; height: 70px;" class="rounded-circle float-right"></td>
                     <td style="width:600px;">
-                        <h5 class="font-weight-bold" style="color:#e86f00">@item.Email</h5>
+                        <h5 class="font-weight-bold" style="color:#e86f00">@item.Email
+                        @if (item.rating == 1)
+                        {
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        }
+                        else if (item.rating == 2)
+                        {
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        }
+                        else if (item.rating == 3)
+                        {
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        }
+                        else if (item.rating == 4)
+                        {
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        } </h5>
                         <p class="font-weight-light">@item.komentar</p>
                     </td>                    
                     <td>

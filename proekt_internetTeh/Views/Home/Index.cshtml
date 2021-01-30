@@ -43,21 +43,29 @@
                                         <img src="@item.slikaUrl" class="card-img-top" style="height:200px;" />
                                     </div>
                                     <div class="flip-card-back">
-                                        <img src="@item.slikaUrl" class="card-img-top" style="height:200px;" />
+                                        @if (item.urlSlika2 != null)
+                                        {
+                                            <img src="@item.urlSlika2" class="card-img-top" style="height:200px;" />
+                                        }
+                                        else
+                                        {
+                                            <img src="https://dapp.dblog.org/img/default.jpg" class="card-img-top" style="height:200px;"/>
+
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body" style="height: 150px; overflow:hidden;">
                             <h4>@Html.DisplayFor(modelItem => item.zanimanje)</h4>
-                            <p class="small"> @Html.DisplayFor(modelItem => item.opis)</p>
+                            <p class="small" style="white-space: normal">@Html.DisplayFor(modelItem => item.opis)</p>
 
                         </div>
                         <div class="card-footer text-muted font-weight-light">
                             <div class="row">
                                 <div class="col-12">
                                     <i class="fa fa-user small text-muted"> @item.pravnoLice</i>
-                                    <i class="fa fa-calendar small"> @item.krajnaData</i>
+                                    <i class="fa fa-calendar small"> @item.krajnaData.Value.Date.ToString("d")</i>
                                 </div>
                             </div>
                             <div class="row pt-2">
@@ -66,8 +74,9 @@
 
                                     @if (Request.IsAuthenticated)
                                     {
+                                <a href="/Account/AddToFavorite/@item.Id" class="btn btn-link text-dark btn-light"><i class="fa fa-cart-plus fa-lg"></i></a>
                                         <!---TUKA TREBA DA SE PROVERE DALI NA TAJ KORISNIK TAJ TUKA OGLAS MU E U FAVORITES, AKO MU E SRCETO DA E POLNO, AKO NE, SRCETO PRAZNO-->
-                                        <a href="/Account/AddToFavorite/@item.Id" class="btn btn-link text-danger btn-light"><i class="fa fa-heart"></i></a>
+                                        
                                     }
                                 </div>
                             </div>

@@ -23,14 +23,14 @@ namespace proekt_internetTeh
                             "~/Scripts/bootstrap.js",
                             "~/Scripts/bootbox.js",
                              "~/Scripts/DataTables/jquery.datatables.js",
-                             "~/Scripts/DataTables/dataTables.bootstrap.js"
+                             "~/Scripts/DataTables/dataTables.bootstrap4.js"
                              ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/Site.css",
                       "~/Content/flip_card_css.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap4.css",
                       "~/Content/all.min.css"));
         }
     }

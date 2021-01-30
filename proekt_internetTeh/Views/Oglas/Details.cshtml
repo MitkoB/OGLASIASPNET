@@ -15,6 +15,11 @@
                 <div class="col-12 text-center">
                     <!------ Тука провери ако има и втора слика внесено стави га до првата у иста колона ваљда добро ќее ----->
                     <img src="@Model.slikaUrl" style="width:400px; height:300px;" />
+                    @if (Model.urlSlika2 != null)
+                    {
+                        <img src="@Model.urlSlika2" style="width:400px; height:300px;" />
+                    }
+                    
                 </div>
             </div>
 

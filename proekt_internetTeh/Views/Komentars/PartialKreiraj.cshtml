@@ -9,11 +9,18 @@
 @using (Html.BeginForm("PartialKreiraj", "Komentars"))
 {
 
-    <div class="form-group mt-3">
-        @Html.DisplayFor(m => m.Email)
-        @Html.TextBoxFor(m => m.komentar, new { @class = "form-control" })
-        <button type="submit" class="btn text-white mt-2" style="background-color:#e86f00">Постави коментар</button>
+<div class="form-group mt-3">
+    @Html.DisplayFor(m => m.Email)
+    <div class="stars">
+     @Html.RadioButtonFor(model => model.rating, 1)1
+     @Html.RadioButtonFor(model => model.rating, 2)2
+     @Html.RadioButtonFor(model => model.rating, 3)3
+     @Html.RadioButtonFor(model => model.rating, 4)4
+     @Html.RadioButtonFor(model => model.rating, 5)5
     </div>
+    @Html.TextBoxFor(m => m.komentar, new { @class = "form-control" })
+    <button type="submit" class="btn text-white mt-2" style="background-color:#e86f00">Постави коментар</button>
+</div>
         @Html.HiddenFor(m => m.Email)
         @Html.HiddenFor(m => m.oglasID)
 

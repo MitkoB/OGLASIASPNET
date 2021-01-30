@@ -9,7 +9,13 @@
             <li class="dropdown">
                 <a class=" dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user"></i> @User.Identity.GetUserName()<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li class="dropdown-header"> <a href="/Account/addUserToRole" style="color:orangered" class="font-weight-bold pt-2 text-center">Додади улога</a> </li>
+
+                    }
                     <li class="dropdown-header">
+                       
                         <a href="javascript:document.getElementById('logoutForm').submit()" style="color:orangered" class="font-weight-bold pt-2 text-center">Одјави се</a>
                     </li>
                 </ul>

@@ -14,5 +14,7 @@ namespace proekt_internetTeh.Models
         public int oglasID { get; set; }
         [Display(Name ="Коментар")]
         public string komentar { get; set; }
+        [Display(Name = "Оцена")]
+        public int rating { get; set; }
     }
 }
