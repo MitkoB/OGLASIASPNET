@@ -32,26 +32,7 @@ namespace proekt_internetTeh.Controllers
             return PartialView(komentari);
         }
         [Authorize(Roles ="Administrator,Editor,User")]
-        public ActionResult Kreiraj(int id)
-        {
-            Komentar model = new Komentar();
-            model.Email = User.Identity.GetUserName();
-            model.oglasID = id;
-            ViewBag.OglasKomentar = db.Oglas.Find(id).zanimanje;
-            return View(model);
-        }
-        [HttpPost]
-        public ActionResult Kreiraj(Komentar model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View("Kreiraj", model);
-
-            }
-            db.Komentars.Add(model);
-            db.SaveChanges();
-            return RedirectToAction("Index", new { Id = model.oglasID });
-        }
+  
         [ChildActionOnly]
         public ActionResult PartialKreiraj(int id)
         {
