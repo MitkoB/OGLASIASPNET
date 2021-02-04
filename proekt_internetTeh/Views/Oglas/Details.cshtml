@@ -58,7 +58,7 @@
             <div class="row mt-3">
                 <div class="col-12 text-center">
                     <a href="/Oglas/Index" class="btn btn-link btn-lg text-white" style="background-color:#e86f00"> &lang; Сите огласи</a>
-                    @if (User.Identity.Name.Equals(Model.email))
+                    @if (User.Identity.Name.Equals(Model.email) || User.IsInRole("Editor"))
                     {
                         <a href="/Oglas/Edit/@Model.Id" class="btn btn-link btn-lg text-white ml-2" style="background-color:#e86f00">Измени оглас</a>
                         <a href="/Oglas/Delete/@Model.Id" class="btn btn-link btn-lg text-white ml-2 btn-danger" >Избриши оглас <i class="fa fa-trash text-white"></i></a>

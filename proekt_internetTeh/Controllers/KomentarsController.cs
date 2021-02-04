@@ -92,7 +92,7 @@ namespace proekt_internetTeh.Controllers
         public ActionResult Delete(int id)
         {
             Komentar komentar = db.Komentars.Find(id);
-            if (User.Identity.Name == komentar.Email)
+            if (User.Identity.Name == komentar.Email || User.IsInRole("Administrator"))
             {
                 var identifikacija = komentar.oglasID;
                 db.Komentars.Remove(komentar);

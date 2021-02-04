@@ -73,7 +73,7 @@
                     </td>                    
                     <td>
                         
-                        @if (User.Identity.Name.Equals(item.Email))
+                        @if (User.Identity.Name.Equals(item.Email) || User.IsInRole("Administrator"))
                         {
                             @Ajax.ActionLink(" Избриши коментар ", "Delete", "Komentars", new { id = item.Id }, new AjaxOptions
                             {

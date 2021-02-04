@@ -102,7 +102,7 @@ namespace proekt_internetTeh.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,zanimanje,kategorija,pocetnaData,krajnaData,pravnoLice,opstina,adresa,email,telBroj,slikaUrl,opis, cena, urlSlika2")] Oglas oglas)
         {
-            if (User.Identity.Name == oglas.email)
+            if (User.Identity.Name == oglas.email || User.IsInRole("Editor"))
             {
                 if (ModelState.IsValid)
                 {
@@ -121,7 +121,7 @@ namespace proekt_internetTeh.Controllers
         {
             Oglas oglas = db.Oglas.Find(id);
 
-            if (User.Identity.Name == oglas.email)
+            if (User.Identity.Name == oglas.email || User.IsInRole("Editor"))
             {
                 db.Oglas.Remove(oglas);
                 db.SaveChanges();
